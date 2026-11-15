@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Launch Radar</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-content">
+      <div class="logo">
+        <span class="radar-icon">&#9678;</span>
+        <h1>Token Launch Radar</h1>
+      </div>
+      <div class="meta-info" id="metaInfo">Loading radar data...</div>
+    </div>
+  </header>
+
+  <main class="container" id="mainContainer">
+    <!-- Board View -->
+    <section id="boardView" class="view">
+      <div class="controls-bar">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search protocols, categories, chains..." aria-label="Search protocols">
+        </div>
+        <div class="filters">
+          <select id="categoryFilter" aria-label="Filter by category">
+            <option value="">All Categories</option>
+          </select>
+          <select id="chainFilter" aria-label="Filter by chain">
+            <option value="">All Chains</option>
+          </select>
+          <label class="toggle-label">
+            <input type="checkbox" id="watchlistToggle"> Watchlist Only
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="board-table" id="boardTable">
+          <thead>
+            <tr>
+              <th data-sort="rank">Rank</th>
+              <th data-sort="name">Protocol</th>
+              <th data-sort="tvl_usd">TVL</th>
+              <th data-sort="change_7d">7d Change</th>
+              <th data-sort="age_days">Age (No Token)</th>
+              <th data-sort="implied_value_usd">Implied Value</th>
+              <th data-sort="score">Score / Mult</th>
+            </tr>
+          </thead>
+          <tbody id="boardTableBody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="methodology-section">
+        <h2>Methodology & Implied Value Model</h2>
+        <p>Token Launch Radar is a deterministic offline analytics engine that scores pre-token DeFi protocols from DefiLlama snapshots using TVL, 7-day growth, and protocol age to construct a ranked implied value board and actionable multi-step farm plans.</p>
+        <div class="formula-grid">
+          <div class="formula-card">
+            <h3>Base Valuation</h3>
+            <p>Base = TVL &times; Base Multiple (0.25). Represents foundational capital scale.</p>
+          </div>
+          <div class="formula-card">
+            <h3>Growth Multiplier</h3>
+            <p>Growth = Clamp(7d Change, -60%, 120%). Growth Multiplier = 1 + (Growth / 100) &times; 0.5.</p>
+          </div>
+          <div class="formula-card">
+            <h3>Maturity Multiplier</h3>
+            <p>Maturity = 0.6 + min(Age, 1095) / 1095 &times; 0.4. Rewards proven protocol history.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail View -->
+    <section id="detailView" class="view hidden">
+      <button class="back-btn" id="backBtn">&larr; Back to Board</button>
+      <div id="detailContent">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+  </main>
+
+  <script src="../data.js" onerror="this.onerror=null;src='data.js'"></script>
+  <script src="app.js"></script>
+</body>
+</html>
