@@ -1,0 +1,1 @@
+withheld: the parent Hermes agent ran the Gemini CLI sessions programmatically; their system prompt is the Gemini CLI built-in one and is not accessible from this session.
